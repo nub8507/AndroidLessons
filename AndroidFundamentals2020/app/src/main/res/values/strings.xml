@@ -4,4 +4,13 @@
     <string name="pg_text">13+</string>
     <string name="name_text">Avengers:\nEnd Game</string>
     <string name="tag_text">Action, Adventure, Fantasy</string>
+    <string name="rating_text">125 Reviews</string>
+    <string name="storyline_name_text">Storyline</string>
+    <string name="storyline_text">"After the devastating events of Avengers: Infinity War, the universe is in ruins. With the help of remaining allies,the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe."</string>
+    <string name="cast_name_text">Cast</string>
+    <string name="movie1_text">Robert Downey Jr.</string>
+    <string name="movie2_text">Chris Evans</string>
+    <string name="movie3_text">Mark Ruffalo</string>
+    <string name="movie4_text">Chris Hemsworth</string>
+
 </resources>
