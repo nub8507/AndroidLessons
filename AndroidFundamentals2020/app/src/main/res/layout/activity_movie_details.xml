@@ -258,8 +258,10 @@
         <ImageView
             android:id="@+id/movie1_image_view"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:scaleType="centerInside"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toStartOf="@id/movie2_image_view"
             app:layout_constraintStart_toStartOf="parent"
@@ -270,8 +272,9 @@
         <ImageView
             android:id="@+id/movie2_image_view"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:scaleType="centerInside"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:layout_marginHorizontal="8dp"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toStartOf="@id/movie3_image_view"
             app:layout_constraintStart_toEndOf="@id/movie1_image_view"
@@ -282,19 +285,22 @@
         <ImageView
             android:id="@+id/movie3_image_view"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:scaleType="centerInside"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="8dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/movie3"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toStartOf="@id/movie4_image_view"
             app:layout_constraintStart_toEndOf="@id/movie2_image_view"
             app:layout_constraintTop_toBottomOf="@+id/movie_guideline"
-            tools:ignore="ContentDescription"
-            android:src="@drawable/movie3" />
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/movie4_image_view"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="8dp"
             android:scaleType="centerCrop"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
