@@ -12,5 +12,7 @@
     <string name="movie2_text">Chris Evans</string>
     <string name="movie3_text">Mark Ruffalo</string>
     <string name="movie4_text">Chris Hemsworth</string>
+    <string name="title_activity_fragmetn_movies_details">fragmetn_movies_details</string>
+    <string name="movie_list_top_menu_text">Movies list</string>
 
 </resources>

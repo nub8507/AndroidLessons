@@ -5,7 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.androidfundamentals2020.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),FragmentMoviesDetails.OnMoviesDetailsListener {
+
 
     private lateinit var binding: ActivityMainBinding
 
@@ -13,9 +14,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.movieDetailsBtn.setOnClickListener {
-            val intent = Intent( this, MovieDetailsActivity::class.java)
-            startActivity(intent)
-        }
+    }
+
+    override fun onMoviesDetailsButtonBackClicked(fragmentIndex: Int) {
+        supportFragmentManager.findFragmentById(R.id.main_frame_layout)
     }
 }
