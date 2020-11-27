@@ -123,7 +123,7 @@
 
         <me.zhanghai.android.materialratingbar.MaterialRatingBar
             style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
-            android:id="@+id/star_rating_bar"
+            android:id="@+id/star_ratingbar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:max="5"
@@ -145,9 +145,9 @@
             android:textAllCaps="true"
             android:textColor="@color/rating_text_view"
             android:textSize="@dimen/rating_text_text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/star_rating_bar"
-            app:layout_constraintStart_toEndOf="@+id/star_rating_bar"
-            app:layout_constraintTop_toTopOf="@+id/star_rating_bar" />
+            app:layout_constraintBottom_toBottomOf="@+id/star_ratingbar"
+            app:layout_constraintStart_toEndOf="@+id/star_ratingbar"
+            app:layout_constraintTop_toTopOf="@+id/star_ratingbar" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/storyline_guideline"
@@ -326,4 +326,5 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>

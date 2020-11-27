@@ -11,6 +11,8 @@ import com.example.androidfundamentals2020.databinding.FragmentMoviesListBinding
 class FragmentMoviesList : Fragment() {
 
     private var binding: FragmentMoviesListBinding? = null
+    private var listener: OnMoviesListListener? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,10 +28,20 @@ class FragmentMoviesList : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding= FragmentMoviesListBinding.bind(view)
+        binding!!.btnMovieSelect.setOnClickListener { listener?.onMoviesListMovieClicked()}
     }
 
     override fun onDestroyView() {
         binding = null
+        listener = null
         super.onDestroyView()
+    }
+
+    fun setClickListener(l: OnMoviesListListener?) {
+        listener = l
+    }
+
+    interface OnMoviesListListener {
+        fun onMoviesListMovieClicked()
     }
 }

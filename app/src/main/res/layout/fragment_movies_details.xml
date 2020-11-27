@@ -12,7 +12,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background">
+        android:background="@color/background"
+        >
 
         <ImageView
             android:id="@+id/background_image_view"
@@ -24,7 +25,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:src="@drawable/background_orig"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription"
+            />
 
         <ImageView
             android:id="@+id/background_mask_image_view"
@@ -36,7 +38,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:src="@drawable/background_mask"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription"
+            />
 
         <ImageButton
             android:id="@+id/image_button_back"
@@ -98,7 +101,7 @@
             android:maxLines="2"
             android:minLines="2"
             android:text="@string/name_text"
-            android:textColor="#ECECEC"
+            android:textColor="@color/movie_name_text_view"
             android:textSize="@dimen/name_text_text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -123,7 +126,7 @@
 
         <me.zhanghai.android.materialratingbar.MaterialRatingBar
             style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
-            android:id="@+id/star_rating_bar"
+            android:id="@+id/star_ratingbar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:max="5"
@@ -145,9 +148,9 @@
             android:textAllCaps="true"
             android:textColor="@color/rating_text_view"
             android:textSize="@dimen/rating_text_text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/star_rating_bar"
-            app:layout_constraintStart_toEndOf="@+id/star_rating_bar"
-            app:layout_constraintTop_toTopOf="@+id/star_rating_bar" />
+            app:layout_constraintBottom_toBottomOf="@+id/star_ratingbar"
+            app:layout_constraintStart_toEndOf="@+id/star_ratingbar"
+            app:layout_constraintTop_toTopOf="@+id/star_ratingbar" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/storyline_guideline"
@@ -324,6 +327,6 @@
             app:layout_constraintStart_toStartOf="@id/movie4_image_view"
             app:layout_constraintTop_toBottomOf="@+id/movie4_image_view" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>

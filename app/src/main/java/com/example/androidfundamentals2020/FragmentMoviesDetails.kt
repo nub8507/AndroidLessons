@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import com.example.androidfundamentals2020.databinding.FragmentMoviesDetailsBinding
 
 class FragmentMoviesDetails : Fragment() {
-    // TODO: Rename and change types of parameters
     private var binding: FragmentMoviesDetailsBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +23,7 @@ class FragmentMoviesDetails : Fragment() {
 
     private fun btnBackClick() {
         val listener = activity as OnMoviesDetailsListener?
-        listener?.onMoviesDetailsButtonBackClicked(0)        //TODO возвращать индекс конкретного фрагмента
+        listener?.onMoviesDetailsButtonBackClicked()
     }
 
 
@@ -42,6 +41,6 @@ class FragmentMoviesDetails : Fragment() {
     }
 
     interface OnMoviesDetailsListener {
-        fun onMoviesDetailsButtonBackClicked(fragmentIndex: Int)
+        fun onMoviesDetailsButtonBackClicked()
     }
 }
