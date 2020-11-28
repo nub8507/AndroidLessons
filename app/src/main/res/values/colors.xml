@@ -18,4 +18,6 @@
     <color name="gray_rating_star">#6D6D80</color>
     <color name="movie_list_background">#191926</color>
     <color name="background_empty">#00191926</color>
+    <color name="movie_list_stroke">#222232</color>
+
 </resources>
