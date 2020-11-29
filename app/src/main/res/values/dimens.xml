@@ -2,11 +2,18 @@
 <resources>
     <dimen name="btn_back_text_size">12sp</dimen>
     <dimen name="name_text_text_size">40sp</dimen>
+    <dimen name="name_list_text_text_size">14sp</dimen>
     <dimen name="name_text_line_height">40dp</dimen>
+    <dimen name="name_list_text_line_height">20dp</dimen>
     <dimen name="tag_text_text_size">14sp</dimen>
+    <dimen name="tag_list_text_text_size">8sp</dimen>
     <dimen name="tag_text_line_height">20dp</dimen>
+    <dimen name="tag_list_text_line_height">14dp</dimen>
+    <dimen name="pg_list_text_text_size">12sp</dimen>
     <dimen name="rating_text_text_size">14sp</dimen>
+    <dimen name="rating_list_text_text_size">8sp</dimen>
     <dimen name="rating_text_line_height">20dp</dimen>
+    <dimen name="rating_list_text_line_height">12dp</dimen>
     <dimen name="storyline_name_text_text_size">14sp</dimen>
     <dimen name="storyline_name_text_line_height">20dp</dimen>
     <dimen name="storyline_text_text_size">14sp</dimen>
@@ -15,4 +22,6 @@
     <dimen name="movie_name_text_line_height">20dp</dimen>
     <dimen name="movie_text_text_size">12sp</dimen>
     <dimen name="movie_text_line_height">16dp</dimen>
+    <dimen name="box_inset_layout_padding">0dp</dimen>
+    <dimen name="inner_frame_layout_padding">5dp</dimen>
 </resources>

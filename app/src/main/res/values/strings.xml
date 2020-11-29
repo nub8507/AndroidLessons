@@ -3,6 +3,7 @@
     <string name="btn_back">Back</string>
     <string name="pg_text">13+</string>
     <string name="name_text">Avengers:\nEnd Game</string>
+    <string name="name_list_text">Avengers:End Game</string>
     <string name="tag_text">Action, Adventure, Fantasy</string>
     <string name="rating_text">125 Reviews</string>
     <string name="storyline_name_text">Storyline</string>
@@ -12,5 +13,7 @@
     <string name="movie2_text">Chris Evans</string>
     <string name="movie3_text">Mark Ruffalo</string>
     <string name="movie4_text">Chris Hemsworth</string>
-
+    <string name="title_activity_fragmetn_movies_details">fragmetn_movies_details</string>
+    <string name="movie_list_top_menu_text">Movies list</string>
+    <string name="movie_time_text">137 min</string>
 </resources>

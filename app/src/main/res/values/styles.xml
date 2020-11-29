@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <style name="Widget.MaterialRatingBar.RatingBar.Indicator.Small" parent="android:Widget.RatingBar">
+        <item name="android:minHeight">14dp</item>
+        <item name="android:maxHeight">14dp</item>
+        <item name="android:isIndicator">true</item>
+        <item name="mrb_progressTint">@color/red_rating_star</item>
+        <item name="mrb_secondaryProgressTint">@color/gray_rating_star</item>
+        <item name="mrb_progressBackgroundTint">@color/gray_rating_star</item>
+        <item name="mrb_fillBackgroundStars">true</item>
+        <item name="android:stepSize">1</item>
+    </style>
+
+    <style name="Widget.MaterialRatingBar.RatingBar.Indicator.Small8" parent="android:Widget.RatingBar">
+        <item name="android:minHeight">8dp</item>
+        <item name="android:maxHeight">8dp</item>
+        <item name="android:isIndicator">true</item>
+        <item name="mrb_progressTint">@color/red_rating_star</item>
+        <item name="mrb_secondaryProgressTint">@color/gray_rating_star</item>
+        <item name="mrb_progressBackgroundTint">@color/gray_rating_star</item>
+        <item name="mrb_fillBackgroundStars">true</item>
+        <item name="android:stepSize">1</item>
+    </style>
+
+</resources>
+

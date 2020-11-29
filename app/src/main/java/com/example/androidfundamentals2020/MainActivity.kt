@@ -1,11 +1,10 @@
 package com.example.androidfundamentals2020
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.androidfundamentals2020.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MoviesListFragment.OnMoviesListListener  {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -13,9 +12,23 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.movieDetailsBtn.setOnClickListener {
-            val intent = Intent( this, MovieDetailsActivity::class.java)
-            startActivity(intent)
+
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                    .apply {
+                        add(R.id.main_frame_layout, MoviesListFragment.newInstance())
+                        commit()
+                    }
         }
     }
+
+    override fun onMoviesListMovieClicked() {
+        supportFragmentManager.beginTransaction()
+            .apply {
+                add(R.id.main_frame_layout, MovieDetailsFragment.newInstance())
+                addToBackStack(null)
+                commit()
+            }
+    }
+
 }
