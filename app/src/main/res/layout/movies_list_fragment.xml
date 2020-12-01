@@ -23,33 +23,27 @@
             app:layout_constraintTop_toTopOf="parent"
             />
 
-        <ImageButton
-            android:id="@+id/image_button_list"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/combined_shape"
-            android:background="@color/background_empty"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/movie_list_top_menu_guideline"
-            tools:ignore="ContentDescription"
-            />
-
         <Button
             android:id="@+id/button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:padding="0dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:drawableLeft="@drawable/combined_shape"
             android:background="@color/background_empty"
             android:fontFamily="@font/roboto_black"
             android:lineHeight="20dp"
             android:text="@string/movie_list_top_menu_text"
             android:textAllCaps="false"
-            android:textColor="#ECECEC"
+            android:textColor="@color/movie_name_text_view"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/image_button_list"
-            app:layout_constraintStart_toEndOf="@id/image_button_list"
-            app:layout_constraintTop_toTopOf="@+id/image_button_list"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/movie_list_top_menu_guideline"
             />
 
         <androidx.constraintlayout.widget.Guideline
@@ -61,181 +55,14 @@
             app:layout_constraintTop_toTopOf="parent"
             />
 
-        <ImageView
-            android:id="@+id/imageView"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/movie_list_recycler_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="-2dp"
-            android:layout_marginTop="-2dp"
-            android:layout_marginEnd="-2dp"
-            android:src="@drawable/movie_list_bg"
-            app:layout_constraintBottom_toBottomOf="@id/time_text_view"
-            app:layout_constraintEnd_toEndOf="@id/background_image_view"
-            app:layout_constraintStart_toStartOf="@id/background_image_view"
-            app:layout_constraintTop_toTopOf="@id/background_image_view"
-            tools:ignore="ContentDescription"
-            />
-
-        <ImageView
-            android:id="@+id/background_image_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:src="@drawable/movie_list_fragment_back"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/movie_list_movie_guideline"
-            tools:ignore="ContentDescription"
-            />
-
-        <ImageView
-            android:id="@+id/background_mask_image_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:src="@drawable/movie_list_fragment_mask"
-            app:layout_constraintTop_toBottomOf="@id/movie_list_movie_guideline"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="ContentDescription"
-            />
-        
-        <ImageView
-            android:id="@+id/pg_background_view"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/movie_list_pg_bg"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/movie_list_movie_guideline"
-            tools:ignore="ContentDescription"
-            />
-
-        <TextView
-            android:id="@+id/pg_text_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="4dp"
-            android:fontFamily="@font/roboto_black"
-            android:text="@string/pg_text"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="@dimen/pg_list_text_text_size"
-            app:layout_constraintBottom_toBottomOf="@id/pg_background_view"
-            app:layout_constraintEnd_toEndOf="@id/pg_background_view"
-            app:layout_constraintStart_toStartOf="@id/pg_background_view"
-            app:layout_constraintTop_toTopOf="@id/pg_background_view"
-            />
-
-        <me.zhanghai.android.materialratingbar.MaterialRatingBar
-            style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small8"
-            android:id="@+id/star_rating_bar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:max="5"
-            android:progress="3"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="10dp"
-            app:layout_constraintStart_toStartOf="@id/background_image_view"
-            app:layout_constraintBottom_toBottomOf="@+id/background_image_view"
-            />
-
-        <TextView
-            android:id="@+id/rating_text_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:fontFamily="@font/roboto_black"
-            android:lineHeight="@dimen/rating_list_text_line_height"
-            android:text="@string/rating_text"
-            android:textAllCaps="true"
-            android:textColor="@color/rating_text_view"
-            android:textSize="@dimen/rating_list_text_text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/star_rating_bar"
-            app:layout_constraintStart_toEndOf="@+id/star_rating_bar"
-            app:layout_constraintTop_toTopOf="@+id/star_rating_bar"
-            />
-
-        <TextView
-            android:id="@+id/tag_text_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:layout_marginEnd="14dp"
-            android:layout_marginBottom="4dp"
-            android:fontFamily="@font/roboto"
-            android:letterSpacing="-0.01"
-            android:lineHeight="@dimen/tag_list_text_line_height"
-            android:text="@string/tag_text"
-            android:textColor="@color/tag_text_view"
-            android:textSize="@dimen/tag_list_text_text_size"
-            app:layout_constraintEnd_toEndOf="@id/background_image_view"
-            app:layout_constraintStart_toStartOf="@id/background_image_view"
-            app:layout_constraintBottom_toTopOf="@+id/star_rating_bar"
-            />
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="13dp"
-            android:layout_marginEnd="8dp"
-            android:src="@drawable/like"
-            app:layout_constraintEnd_toEndOf="@id/background_image_view"
-            app:layout_constraintTop_toTopOf="@id/background_image_view"
-            tools:ignore="ContentDescription"
-            />
-
-        <TextView
-            android:id="@+id/name_text_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:fontFamily="@font/roboto_black"
-            android:lineHeight="@dimen/name_list_text_line_height"
-            android:text="@string/name_list_text"
-            android:textColor="@color/movie_name_text_view"
-            android:textSize="@dimen/name_list_text_text_size"
-            app:layout_constraintEnd_toEndOf="@id/background_image_view"
-            app:layout_constraintStart_toStartOf="@id/background_image_view"
-            app:layout_constraintTop_toBottomOf="@id/background_image_view" />
-
-        <TextView
-            android:id="@+id/time_text_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_black"
-            android:lineHeight="@dimen/rating_list_text_line_height"
-            android:text="@string/movie_time_text"
-            android:textAllCaps="true"
-            android:minLines="2"
-            android:textColor="@color/rating_text_view"
-            android:textSize="@dimen/rating_list_text_text_size"
-            app:layout_constraintEnd_toEndOf="@+id/name_text_view"
-            app:layout_constraintStart_toStartOf="@+id/name_text_view"
-            app:layout_constraintTop_toBottomOf="@+id/name_text_view" />
-
-        <ImageView
-            android:id="@+id/corner_image_view"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:src="@drawable/movie_list_bg"
-            app:layout_constraintBottom_toBottomOf="@id/time_text_view"
-            app:layout_constraintEnd_toEndOf="@id/background_image_view"
-            app:layout_constraintStart_toStartOf="@id/background_image_view"
-            app:layout_constraintTop_toTopOf="@id/background_image_view"
-            tools:ignore="ContentDescription"
-            />
-
-        <Button
-            android:id="@+id/btn_movie_select"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@color/background_empty"
-            app:layout_constraintBottom_toBottomOf="@id/background_image_view"
-            app:layout_constraintEnd_toEndOf="@id/background_image_view"
-            app:layout_constraintStart_toStartOf="@id/background_image_view"
-            app:layout_constraintTop_toTopOf="@id/movie_list_movie_guideline"
+            app:layout_constraintTop_toTopOf="@+id/movie_list_movie_guideline"
+            app:layout_constraintEnd_toEndOf="parent"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

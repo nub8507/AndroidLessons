@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.androidfundamentals2020.databinding.MoviesListFragmentBinding
 
 class MoviesListFragment : Fragment() {
@@ -24,13 +26,18 @@ class MoviesListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.movies_list_fragment, container, false)
+        val movieListRecyclerView = container?.findViewById<View>(R.id.movie_list_recycler_view) as RecyclerView
+        val movies = MovieListData.getMoviesListData()
+        movieListRecyclerView.adapter = MovieListAdapter(movies)
+        val view = inflater.inflate(R.layout.movies_list_fragment, container, false)
+        movieListRecyclerView.layoutManager = GridLayoutManager(container.context,2)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = MoviesListFragmentBinding.bind(view)
-        binding!!.btnMovieSelect.setOnClickListener { openMovieDetailsListener?.onMoviesListMovieClicked() }
+//        binding!!.btnMovieSelect.setOnClickListener { openMovieDetailsListener?.onMoviesListMovieClicked() }
     }
 
     override fun onDestroyView() {
