@@ -26,23 +26,21 @@ class MoviesListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val movieListRecyclerView = container?.findViewById<View>(R.id.movie_list_recycler_view) as RecyclerView
-        val movies = MovieListData.getMoviesListData()
-        movieListRecyclerView.adapter = MovieListAdapter(movies)
-        val view = inflater.inflate(R.layout.movies_list_fragment, container, false)
-        movieListRecyclerView.layoutManager = GridLayoutManager(container.context,2)
-        return view
+        return inflater.inflate(R.layout.movies_list_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = MoviesListFragmentBinding.bind(view)
-//        binding!!.btnMovieSelect.setOnClickListener { openMovieDetailsListener?.onMoviesListMovieClicked() }
+        val movieListRecyclerView = view.findViewById<View>(R.id.movie_list_recycler_view) as RecyclerView
+        val movies = MovieListData.getMoviesListData()
+        movieListRecyclerView.adapter = MovieListAdapter(movies,movieOnClick)
+        movieListRecyclerView.layoutManager = GridLayoutManager(view.context,2)
     }
 
     override fun onDestroyView() {
-        binding = null
         super.onDestroyView()
+        binding = null
     }
 
     override fun onDetach() {
@@ -52,6 +50,12 @@ class MoviesListFragment : Fragment() {
 
     interface OnMoviesListListener {
         fun onMoviesListMovieClicked()
+    }
+
+    private val movieOnClick = object : MovieListAdapter.OnRecyclerItemClicked {
+        override fun onClick(movieNum: Int) {
+            openMovieDetailsListener?.onMoviesListMovieClicked()
+        }
     }
 
     companion object {

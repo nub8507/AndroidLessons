@@ -1,20 +1,19 @@
 package com.example.androidfundamentals2020
 
-class MovieActorData(val image: String,
+class MovieActorData(val image: Int,
                      val name: String
                     )  {
 
     companion object {
-        private var lastContactId = 0
-        fun getMoviesListData(): ArrayList<MovieActorData> {
-            val movies = ArrayList<MovieActorData>()
-            movies.apply {
-                add(MovieActorData("@drawable/movie1", "Robert Downey Jr."))
-                add(MovieActorData("@drawable/movie2", "Chris Evans"))
-                add(MovieActorData("@drawable/movie3", "Mark Ruffalo"))
-                add(MovieActorData("@drawable/movie4", "Chris Hemsworth"))
+        fun getActorsListData(): ArrayList<MovieActorData> {
+            val actors = ArrayList<MovieActorData>()
+            actors.apply {
+                add(MovieActorData(R.drawable.movie1, "Robert Downey Jr."))
+                add(MovieActorData(R.drawable.movie2,"Chris Evans"))
+                add(MovieActorData(R.drawable.movie3, "Mark Ruffalo"))
+                add(MovieActorData(R.drawable.movie4, "Chris Hemsworth"))
             }
-            return movies
+            return actors
         }
     }
 
