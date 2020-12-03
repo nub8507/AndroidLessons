@@ -59,11 +59,28 @@
             android:id="@+id/movie_list_recycler_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_margin="11dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/movie_list_movie_guideline"
             app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="invisible"
             />
+
+        <TextView
+            android:id="@+id/empty_recycler_text_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/empty_movies_text"
+            android:textSize="@dimen/empty_movies_text_size"
+            android:gravity="center"
+            android:textColor="@color/movie_name_text_view"
+            app:layout_constraintBottom_toBottomOf="@+id/movie_list_recycler_view"
+            app:layout_constraintEnd_toEndOf="@+id/movie_list_recycler_view"
+            app:layout_constraintStart_toStartOf="@+id/movie_list_recycler_view"
+            app:layout_constraintTop_toTopOf="@+id/movie_list_recycler_view"
+            />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -15,7 +15,7 @@
         android:layout_height="0dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:src="@drawable/movie4"
+        android:src="@drawable/actor4"
         android:scaleType="centerCrop"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"

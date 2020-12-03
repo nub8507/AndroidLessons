@@ -18,6 +18,7 @@ class MovieListAdapter(private val movies: List<MovieListData>, private val clic
         val ratingStars = listItemView.findViewById<me.zhanghai.android.materialratingbar.MaterialRatingBar>(R.id.star_rating_bar)!!
         val rating: TextView = listItemView.findViewById(R.id.rating_text_view)
         val time: TextView = listItemView.findViewById(R.id.time_text_view)
+        val pgRating: TextView = listItemView.findViewById(R.id.pg_text_view)
         val buttonMovieSelect: Button = listItemView.findViewById(R.id.btn_movie_select)
     }
 
@@ -32,10 +33,11 @@ class MovieListAdapter(private val movies: List<MovieListData>, private val clic
         movies[position].apply {
             holder.background.load(background)
             holder.name.text = name
-            holder.rating.text = "$rating Reviews"
+            holder.rating.text = "$reviews Reviews"
             holder.tag.text = tag
             holder.time.text = "$time min"
             holder.ratingStars.setProgress(ratingStars,true)
+            holder.pgRating.text = pgRating
         }
         holder.buttonMovieSelect.setOnClickListener{ clickListener.onClick(position) }
     }

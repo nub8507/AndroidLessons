@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidfundamentals2020.databinding.MoviesListFragmentBinding
@@ -32,10 +33,19 @@ class MoviesListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = MoviesListFragmentBinding.bind(view)
-        val movieListRecyclerView = view.findViewById<View>(R.id.movie_list_recycler_view) as RecyclerView
+        val movieListRecyclerView = view.findViewById<RecyclerView>(R.id.movie_list_recycler_view)
+        val movieListEmpty = view.findViewById<TextView>(R.id.empty_recycler_text_view)
         val movies = MovieListData.getMoviesListData()
         movieListRecyclerView.adapter = MovieListAdapter(movies,movieOnClick)
         movieListRecyclerView.layoutManager = GridLayoutManager(view.context,2)
+        if(movies.size > 0){
+            movieListRecyclerView.visibility =android.view.View.VISIBLE
+            movieListEmpty.visibility =android.view.View.GONE
+        }else{
+            movieListRecyclerView.visibility =android.view.View.INVISIBLE
+            movieListEmpty.visibility =android.view.View.VISIBLE
+        }
+
     }
 
     override fun onDestroyView() {

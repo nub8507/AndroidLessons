@@ -5,6 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="6dp"
         android:background="@color/movie_list_background"
         tools:context=".MoviesListFragment"
         >
@@ -26,14 +27,17 @@
         <ImageView
             android:id="@+id/background_image_view"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/movie_list_fragment_back"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="0dp"
+            android:src="@drawable/movie_list_fragment_back1"
+            app:layout_constraintStart_toStartOf="@+id/background_mask_image_view"
+            app:layout_constraintTop_toTopOf="@+id/background_mask_image_view"
+            app:layout_constraintEnd_toEndOf="@+id/background_mask_image_view"
+            app:layout_constraintBottom_toBottomOf="@+id/background_mask_image_view"
             tools:ignore="ContentDescription"
             />
 
         <ImageView
+            android:id="@+id/background_mask_image_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:src="@drawable/movie_list_fragment_mask"
