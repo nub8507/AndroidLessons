@@ -18,7 +18,7 @@ class MoviesListFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if(context is OnMoviesListListener) {
+        if (context is OnMoviesListListener) {
             openMovieDetailsListener = context
         }
     }
@@ -36,14 +36,14 @@ class MoviesListFragment : Fragment() {
         val movieListRecyclerView = view.findViewById<RecyclerView>(R.id.movie_list_recycler_view)
         val movieListEmpty = view.findViewById<TextView>(R.id.empty_recycler_text_view)
         val movies = MovieListData.getMoviesListData()
-        movieListRecyclerView.adapter = MovieListAdapter(movies,movieOnClick)
-        movieListRecyclerView.layoutManager = GridLayoutManager(view.context,2)
-        if(movies.size > 0){
-            movieListRecyclerView.visibility =android.view.View.VISIBLE
-            movieListEmpty.visibility =android.view.View.GONE
-        }else{
-            movieListRecyclerView.visibility =android.view.View.INVISIBLE
-            movieListEmpty.visibility =android.view.View.VISIBLE
+        movieListRecyclerView.adapter = MovieListAdapter(movies, movieOnClick)
+        movieListRecyclerView.layoutManager = GridLayoutManager(view.context, 2)
+        if (movies.isNotEmpty()) {
+            movieListRecyclerView.visibility = View.VISIBLE
+            movieListEmpty.visibility = View.GONE
+        } else {
+            movieListRecyclerView.visibility = View.INVISIBLE
+            movieListEmpty.visibility = View.VISIBLE
         }
 
     }

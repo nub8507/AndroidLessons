@@ -8,9 +8,10 @@ import android.widget.TextView
 import coil.load
 import androidx.recyclerview.widget.RecyclerView
 
-class MovieDetailsActorAdapter(private val actors: List<MovieActorData>) : RecyclerView.Adapter<MovieDetailsActorAdapter.ViewHolder>() {
+class MovieDetailsActorAdapter(private val actors: List<MovieActorData>) :
+    RecyclerView.Adapter<MovieDetailsActorAdapter.ViewHolder>() {
 
-    inner class ViewHolder(listItemView: View) : RecyclerView.ViewHolder(listItemView) {
+    class ViewHolder(listItemView: View) : RecyclerView.ViewHolder(listItemView) {
         val actorAvatar: ImageView = listItemView.findViewById(R.id.actor_image_view)
         val actorName: TextView = listItemView.findViewById(R.id.actor_text_view)
     }
@@ -23,7 +24,7 @@ class MovieDetailsActorAdapter(private val actors: List<MovieActorData>) : Recyc
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.actorAvatar.load(actors[position].image)
+        holder.actorAvatar.load(actors[position].imageResId)
         holder.actorName.text = actors[position].name
     }
 

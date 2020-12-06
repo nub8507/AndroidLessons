@@ -25,19 +25,21 @@ class MovieDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = MoviesDetailsFragmentBinding.bind(view)
-        binding!!.buttonBack.setOnClickListener{ activity?.onBackPressed() }
+        binding!!.buttonBack.setOnClickListener { activity?.onBackPressed() }
 
         val actors = MovieActorData.getActorsListData()
-        val actorListRecyclerView = view.findViewById<RecyclerView>(R.id.movie_detail_actor_recycler_view)
+        val actorListRecyclerView =
+            view.findViewById<RecyclerView>(R.id.movie_detail_actor_recycler_view)
         val actorListEmptyText = view.findViewById<TextView>(R.id.empty_recycler_text_view)
         actorListRecyclerView.adapter = MovieDetailsActorAdapter(actors)
-        actorListRecyclerView.layoutManager = LinearLayoutManager(view.context,RecyclerView.HORIZONTAL,false)
-        if(actors.size > 0){
-            actorListRecyclerView.visibility =android.view.View.VISIBLE
-            actorListEmptyText.visibility =android.view.View.GONE
-        }else{
-            actorListRecyclerView.visibility =android.view.View.INVISIBLE
-            actorListEmptyText.visibility =android.view.View.VISIBLE
+        actorListRecyclerView.layoutManager =
+            LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
+        if (actors.isNotEmpty()) {
+            actorListRecyclerView.visibility = View.VISIBLE
+            actorListEmptyText.visibility = View.GONE
+        } else {
+            actorListRecyclerView.visibility = View.INVISIBLE
+            actorListEmptyText.visibility = View.VISIBLE
         }
 
     }
