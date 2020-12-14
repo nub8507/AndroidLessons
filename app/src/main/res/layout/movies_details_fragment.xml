@@ -12,34 +12,31 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background"
-        >
+        android:background="@color/background">
 
         <ImageView
             android:id="@+id/background_image_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
+            android:src="@drawable/background_orig"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/background_orig"
-            tools:ignore="ContentDescription"
-            />
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/background_mask_image_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
+            android:src="@drawable/background_mask"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/background_mask"
-            tools:ignore="ContentDescription"
-            />
+            tools:ignore="ContentDescription" />
 
 
         <Button
@@ -50,18 +47,17 @@
             android:layout_marginStart="18dp"
             android:layout_marginTop="59dp"
             android:background="@color/background_empty"
+            android:drawableLeft="@drawable/button_back"
             android:insetTop="0dp"
             android:insetBottom="0dp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:padding="0dp"
             android:text="@string/btn_back"
             android:textColor="@color/btn_back_grey"
             android:textSize="@dimen/btn_back_text_size"
-            android:minHeight="0dp"
-            android:minWidth="0dp"
-            android:padding="0dp"
-            android:drawableLeft="@drawable/button_back"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/name_guideline"
@@ -118,17 +114,16 @@
 
 
         <me.zhanghai.android.materialratingbar.MaterialRatingBar
-            style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
             android:id="@+id/star_ratingbar"
+            style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:max="5"
-            android:progress="3"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
+            android:max="5"
+            android:progress="3"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tag_text_view"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/tag_text_view" />
 
         <TextView
             android:id="@+id/rating_text_view"
@@ -206,119 +201,27 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <ImageView
-            android:id="@+id/movie1_image_view"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/movie_detail_actor_recycler_view"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:scaleType="centerCrop"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toStartOf="@id/movie2_image_view"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/movie_guideline"
-            tools:ignore="ContentDescription"
-            android:src="@drawable/movie1" />
-
-        <ImageView
-            android:id="@+id/movie2_image_view"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:scaleType="centerCrop"
-            android:layout_marginHorizontal="8dp"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toStartOf="@id/movie3_image_view"
-            app:layout_constraintStart_toEndOf="@id/movie1_image_view"
-            app:layout_constraintTop_toBottomOf="@+id/movie_guideline"
-            tools:ignore="ContentDescription"
-            android:src="@drawable/movie2" />
-
-        <ImageView
-            android:id="@+id/movie3_image_view"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginHorizontal="8dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/movie3"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toStartOf="@id/movie4_image_view"
-            app:layout_constraintStart_toEndOf="@id/movie2_image_view"
-            app:layout_constraintTop_toBottomOf="@+id/movie_guideline"
-            tools:ignore="ContentDescription" />
-
-        <ImageView
-            android:id="@+id/movie4_image_view"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="8dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintDimensionRatio="1:1"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/movie3_image_view"
-            app:layout_constraintTop_toBottomOf="@+id/movie_guideline"
-            tools:ignore="ContentDescription"
-            android:src="@drawable/movie4" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/movie_guideline" />
 
         <TextView
-            android:id="@+id/movie1_text_view"
+            android:id="@+id/empty_recycler_text_view"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:fontFamily="@font/roboto_black"
-            android:text="@string/movie1_text"
-            android:minLines="2"
-            android:lineHeight="@dimen/movie_text_line_height"
-            android:textColor="@color/movie_text_view"
-            android:textSize="@dimen/movie_text_text_size"
-            app:layout_constraintEnd_toEndOf="@id/movie1_image_view"
-            app:layout_constraintStart_toStartOf="@id/movie1_image_view"
-            app:layout_constraintTop_toBottomOf="@+id/movie1_image_view" />
-
-        <TextView
-            android:id="@+id/movie2_text_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:fontFamily="@font/roboto_black"
-            android:text="@string/movie2_text"
-            android:minLines="2"
-            android:lineHeight="@dimen/movie_text_line_height"
-            android:textColor="@color/movie_text_view"
-            android:textSize="@dimen/movie_text_text_size"
-            app:layout_constraintEnd_toEndOf="@id/movie2_image_view"
-            app:layout_constraintStart_toStartOf="@id/movie2_image_view"
-            app:layout_constraintTop_toBottomOf="@+id/movie2_image_view" />
-
-        <TextView
-            android:id="@+id/movie3_text_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:fontFamily="@font/roboto_black"
-            android:text="@string/movie3_text"
-            android:minLines="2"
-            android:lineHeight="@dimen/movie_text_line_height"
-            android:textColor="@color/movie_text_view"
-            android:textSize="@dimen/movie_text_text_size"
-            app:layout_constraintEnd_toEndOf="@id/movie3_image_view"
-            app:layout_constraintStart_toStartOf="@id/movie3_image_view"
-            app:layout_constraintTop_toBottomOf="@+id/movie3_image_view" />
-
-        <TextView
-            android:id="@+id/movie4_text_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:fontFamily="@font/roboto_black"
-            android:text="@string/movie4_text"
-            android:minLines="2"
-            android:lineHeight="@dimen/movie_text_line_height"
-            android:textColor="@color/movie_text_view"
-            android:textSize="@dimen/movie_text_text_size"
-            app:layout_constraintEnd_toEndOf="@id/movie4_image_view"
-            app:layout_constraintStart_toStartOf="@id/movie4_image_view"
-            app:layout_constraintTop_toBottomOf="@+id/movie4_image_view" />
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="@string/empty_actors_text"
+            android:textColor="@color/movie_name_text_view"
+            android:textSize="@dimen/empty_actors_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/movie_detail_actor_recycler_view"
+            app:layout_constraintStart_toStartOf="@+id/movie_detail_actor_recycler_view"
+            app:layout_constraintTop_toTopOf="@+id/movie_detail_actor_recycler_view" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

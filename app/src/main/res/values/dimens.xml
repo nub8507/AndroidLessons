@@ -24,4 +24,6 @@
     <dimen name="movie_text_line_height">16dp</dimen>
     <dimen name="box_inset_layout_padding">0dp</dimen>
     <dimen name="inner_frame_layout_padding">5dp</dimen>
+    <dimen name="empty_actors_text_size">20dp</dimen>
+    <dimen name="empty_movies_text_size">20dp</dimen>
 </resources>

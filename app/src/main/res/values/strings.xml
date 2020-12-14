@@ -16,4 +16,6 @@
     <string name="title_activity_fragmetn_movies_details">fragmetn_movies_details</string>
     <string name="movie_list_top_menu_text">Movies list</string>
     <string name="movie_time_text">137 min</string>
+    <string name="empty_actors_text">No actors</string>
+    <string name="empty_movies_text">No movies</string>
 </resources>
