@@ -1,3 +1,3 @@
-package com.android.academy.fundamentals.homework.features.data
+package com.example.androidfundamentals2020.data
 
 data class Genre(val id: Int, val name: String)

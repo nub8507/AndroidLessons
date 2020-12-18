@@ -6,11 +6,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import coil.load
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import com.example.androidfundamentals2020.data.Movie
+
 
 class MovieListAdapter(
-    private val movies: List<MovieListData>,
+    private val movies: List<Movie>,
     private val clickListener: OnRecyclerItemClicked
 ) : RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {
 
@@ -24,6 +26,7 @@ class MovieListAdapter(
         val time: TextView = listItemView.findViewById(R.id.time_text_view)
         val pgRating: TextView = listItemView.findViewById(R.id.pg_text_view)
         val buttonMovieSelect: Button = listItemView.findViewById(R.id.btn_movie_select)
+        var movieID: Int = 0
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -35,15 +38,18 @@ class MovieListAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         movies[position].apply {
-            holder.background.load(background)
-            holder.name.text = name
-            holder.rating.text = "$reviews Reviews"
-            holder.tag.text = tag
-            holder.time.text = "$time min"
-            holder.ratingStars.rating = ratingStars.toFloat()
-            holder.pgRating.text = pgRating
+            holder.background.load(poster)
+            holder.name.text = title
+            holder.rating.text = "$numberOfRatings Reviews"
+            var tagMovie: String = ""
+            genres.forEach { tagMovie += it.name + "," }
+            holder.tag.text = tagMovie
+            holder.time.text = "$runtime min"
+            holder.ratingStars.rating = ratings / 2
+            holder.pgRating.text = "$minimumAge+"
+            holder.movieID = id
         }
-        holder.buttonMovieSelect.setOnClickListener { clickListener.onClick(position) }
+        holder.buttonMovieSelect.setOnClickListener { clickListener.onClick(movies[position]) }
     }
 
     override fun getItemCount(): Int {
@@ -51,6 +57,6 @@ class MovieListAdapter(
     }
 
     interface OnRecyclerItemClicked {
-        fun onClick(movieNum: Int)
+        fun onClick(movieData: Movie)
     }
 }

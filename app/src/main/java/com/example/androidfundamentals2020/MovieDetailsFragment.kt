@@ -1,17 +1,17 @@
 package com.example.androidfundamentals2020
 
-import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import com.example.androidfundamentals2020.data.Movie
 import com.example.androidfundamentals2020.databinding.MoviesDetailsFragmentBinding
 
-class MovieDetailsFragment : Fragment() {
+class MovieDetailsFragment(private val movie: Movie) : Fragment() {
 
     private var binding: MoviesDetailsFragmentBinding? = null
 
@@ -27,21 +27,34 @@ class MovieDetailsFragment : Fragment() {
         binding = MoviesDetailsFragmentBinding.bind(view)
         binding!!.buttonBack.setOnClickListener { activity?.onBackPressed() }
 
-        val actors = MovieActorData.getActorsListData()
-        val actorListRecyclerView =
-            view.findViewById<RecyclerView>(R.id.movie_detail_actor_recycler_view)
-        val actorListEmptyText = view.findViewById<TextView>(R.id.empty_recycler_text_view)
-        actorListRecyclerView.adapter = MovieDetailsActorAdapter(actors)
-        actorListRecyclerView.layoutManager =
-            LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
-        if (actors.isNotEmpty()) {
-            actorListRecyclerView.visibility = View.VISIBLE
-            actorListEmptyText.visibility = View.GONE
-        } else {
-            actorListRecyclerView.visibility = View.INVISIBLE
-            actorListEmptyText.visibility = View.VISIBLE
-        }
+        viewFill(view, binding!!)
+    }
 
+    private fun viewFill(view: View, binding: MoviesDetailsFragmentBinding) {
+        movie.apply {
+            binding.backgroundImageView.load(backdrop)
+            binding.pgTextView.text = "$minimumAge+"
+            binding.nameTextView.text = title
+            var tagMovie: String = ""
+            genres.forEach { tagMovie += it.name + "," }
+            binding.tagTextView.text = tagMovie
+            binding.starRatingbar.rating = ratings / 2
+            binding.ratingTextView.text = "$numberOfRatings Reviews"
+            binding.storylineTextView.text = overview
+
+            val actorListRecyclerView = binding.movieDetailActorRecyclerView
+            val actorListEmptyText = binding.emptyRecyclerTextView
+            actorListRecyclerView.adapter = MovieDetailsActorAdapter(actors)
+            actorListRecyclerView.layoutManager =
+                LinearLayoutManager(view.context, RecyclerView.HORIZONTAL, false)
+            if (actors.isNotEmpty()) {
+                actorListRecyclerView.visibility = View.VISIBLE
+                actorListEmptyText.visibility = View.GONE
+            } else {
+                actorListRecyclerView.visibility = View.INVISIBLE
+                actorListEmptyText.visibility = View.VISIBLE
+            }
+        }
     }
 
     override fun onDestroyView() {
@@ -50,8 +63,8 @@ class MovieDetailsFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance(): MovieDetailsFragment {
-            return MovieDetailsFragment()
+        fun newInstance(movieData: Movie): MovieDetailsFragment {
+            return MovieDetailsFragment(movieData)
         }
     }
 

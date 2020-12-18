@@ -5,10 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import coil.load
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import com.example.androidfundamentals2020.data.Actor
 
-class MovieDetailsActorAdapter(private val actors: List<MovieActorData>) :
+class MovieDetailsActorAdapter(private val actors: List<Actor>) :
     RecyclerView.Adapter<MovieDetailsActorAdapter.ViewHolder>() {
 
     class ViewHolder(listItemView: View) : RecyclerView.ViewHolder(listItemView) {
@@ -24,7 +25,7 @@ class MovieDetailsActorAdapter(private val actors: List<MovieActorData>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.actorAvatar.load(actors[position].imageResId)
+        holder.actorAvatar.load(actors[position].picture)
         holder.actorName.text = actors[position].name
     }
 

@@ -17,13 +17,13 @@
         <ImageView
             android:id="@+id/background_image_view"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/background_orig"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/no_load_back"
+            app:layout_constraintBottom_toBottomOf="@+id/background_mask_image_view"
+            app:layout_constraintEnd_toEndOf="@+id/background_mask_image_view"
+            app:layout_constraintStart_toStartOf="@+id/background_mask_image_view"
+            app:layout_constraintTop_toTopOf="@+id/background_mask_image_view"
             tools:ignore="ContentDescription" />
 
         <ImageView
@@ -33,7 +33,6 @@
             android:scaleType="centerCrop"
             android:src="@drawable/background_mask"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
@@ -73,7 +72,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginBottom="12dp"
             android:fontFamily="@font/roboto"
-            android:text="@string/pg_text"
+            android:text="@string/default_pg_text"
             android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@id/name_guideline"
             app:layout_constraintStart_toStartOf="parent" />
@@ -89,7 +88,7 @@
             android:lineHeight="@dimen/name_text_line_height"
             android:maxLines="2"
             android:minLines="2"
-            android:text="@string/name_text"
+            android:text="@string/default_name_text"
             android:textColor="@color/movie_name_text_view"
             android:textSize="@dimen/name_text_text_size"
             app:layout_constraintEnd_toEndOf="parent"
@@ -105,7 +104,7 @@
             android:fontFamily="@font/roboto"
             android:letterSpacing="-0.01"
             android:lineHeight="@dimen/tag_text_line_height"
-            android:text="@string/tag_text"
+            android:text="@string/default_tag_text"
             android:textColor="@color/tag_text_view"
             android:textSize="@dimen/tag_text_text_size"
             app:layout_constraintEnd_toEndOf="parent"
@@ -121,7 +120,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:max="5"
-            android:progress="3"
+            android:progress="0"
+            android:stepSize="0.01"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tag_text_view" />
 
