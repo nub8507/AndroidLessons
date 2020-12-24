@@ -2,9 +2,10 @@ package com.example.androidfundamentals2020
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.androidfundamentals2020.data.Movie
 import com.example.androidfundamentals2020.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(), MoviesListFragment.OnMoviesListListener  {
+class MainActivity : AppCompatActivity(), MoviesListFragment.OnMoviesListListener {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -15,17 +16,17 @@ class MainActivity : AppCompatActivity(), MoviesListFragment.OnMoviesListListene
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                    .apply {
-                        add(R.id.main_frame_layout, MoviesListFragment.newInstance())
-                        commit()
-                    }
+                .apply {
+                    add(R.id.main_frame_layout, MoviesListFragment.newInstance())
+                    commit()
+                }
         }
     }
 
-    override fun onMoviesListMovieClicked() {
+    override fun onMoviesListMovieClicked(movieData: Movie) {
         supportFragmentManager.beginTransaction()
             .apply {
-                add(R.id.main_frame_layout, MovieDetailsFragment.newInstance())
+                add(R.id.main_frame_layout, MovieDetailsFragment.newInstance(movieData))
                 addToBackStack(null)
                 commit()
             }

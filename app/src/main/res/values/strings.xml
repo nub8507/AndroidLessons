@@ -1,21 +1,18 @@
 <resources>
     <string name="app_name">AndroidFundamentals2020</string>
     <string name="btn_back">Back</string>
-    <string name="pg_text">13+</string>
-    <string name="name_text">Avengers:\nEnd Game</string>
-    <string name="name_list_text">Avengers:End Game</string>
-    <string name="tag_text">Action, Adventure, Fantasy</string>
-    <string name="rating_text">125 Reviews</string>
+    <string name="default_pg_text">18+</string>
+    <string name="default_name_text">Empty</string>
+    <string name="name_list_text">Empty</string>
+    <string name="default_tag_text">Empty</string>
+    <string name="rating_text">0 Reviews</string>
     <string name="storyline_name_text">Storyline</string>
-    <string name="storyline_text">"After the devastating events of Avengers: Infinity War, the universe is in ruins. With the help of remaining allies,the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe."</string>
+    <string name="storyline_text">Empty</string>
     <string name="cast_name_text">Cast</string>
-    <string name="movie1_text">Robert Downey Jr.</string>
-    <string name="movie2_text">Chris Evans</string>
-    <string name="movie3_text">Mark Ruffalo</string>
-    <string name="movie4_text">Chris Hemsworth</string>
+    <string name="default_actor_text">Empty</string>
     <string name="title_activity_fragmetn_movies_details">fragmetn_movies_details</string>
     <string name="movie_list_top_menu_text">Movies list</string>
-    <string name="movie_time_text">137 min</string>
+    <string name="movie_time_text">0 min</string>
     <string name="empty_actors_text">No actors</string>
     <string name="empty_movies_text">No movies</string>
 </resources>
