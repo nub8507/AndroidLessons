@@ -37,7 +37,11 @@ class MovieListAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        movies[position].apply {
+        bind(holder, movies[position])
+    }
+
+    fun bind(holder: ViewHolder, movie: Movie) {
+        movie.apply {
             holder.background.load(poster)
             holder.name.text = title
             holder.rating.text = "$numberOfRatings Reviews"
@@ -49,7 +53,7 @@ class MovieListAdapter(
             holder.pgRating.text = "$minimumAge+"
             holder.movieID = id
         }
-        holder.buttonMovieSelect.setOnClickListener { clickListener.onClick(movies[position]) }
+        holder.buttonMovieSelect.setOnClickListener { clickListener.onClick(movie) }
     }
 
     override fun getItemCount(): Int {
