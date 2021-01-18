@@ -18,7 +18,7 @@ class MovieDetailsFragment() : Fragment() {
     private var binding: MoviesDetailsFragmentBinding? = null
 
     private val viewModel: MovieDetailsViewModel by viewModels {
-        MovieDetailsViewModelFactory(MovieListInteractor(requireContext()))
+        MovieDetailsViewModelFactory(MovieListInteractor())
     }
 
     private var selectedMovieID: Int = 0

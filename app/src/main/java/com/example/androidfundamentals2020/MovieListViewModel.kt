@@ -14,12 +14,11 @@ class MovieListViewModel(private val interactor: MovieListInteractor) : ViewMode
     val moviesList: LiveData<List<Movie>> get() = _mutableMovieList
 
     init {
-        getMovies()
+        loadMovies()
     }
 
-    private fun getMovies() {
+    private fun loadMovies() {
         viewModelScope.launch {
-            val movies = interactor.getMoviesList()
             _mutableMovieList.postValue(interactor.getMoviesList())
         }
     }

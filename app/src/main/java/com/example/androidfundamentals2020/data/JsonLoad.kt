@@ -1,109 +1,56 @@
 package com.example.androidfundamentals2020.data
 
-import android.content.Context
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.json.Json
+import com.example.androidfundamentals2020.net.Movies
+import com.example.androidfundamentals2020.net.RetrofitModule.movieApi
 
-
-private val jsonFormat = Json { ignoreUnknownKeys = true }
-
-@Serializable
-private class JsonGenre(val id: Int, val name: String)
-
-@Serializable
-private class JsonActor(
-    val id: Int,
-    val name: String,
-    @SerialName("profile_path")
-    val profilePicture: String
-)
-
-@Serializable
-private class JsonMovie(
-    val id: Int,
-    val title: String,
-    @SerialName("poster_path")
-    val posterPicture: String,
-    @SerialName("backdrop_path")
-    val backdropPicture: String,
-    val runtime: Int,
-    @SerialName("genre_ids")
-    val genreIds: List<Int>,
-    val actors: List<Int>,
-    @SerialName("vote_average")
-    val ratings: Float,
-    @SerialName("vote_count")
-    val votesCount: Int,
-    val overview: String,
-    val adult: Boolean
-)
-
-private suspend fun loadGenres(context: Context): List<Genre> = withContext(Dispatchers.IO) {
-    val data = readAssetFileToString(context, "genres.json")
-    parseGenres(data)
+suspend fun loadBaseUrl(): String {
+    return movieApi.getConfiguration().images?.secureBaseUrl?.dropLast(1) ?: ""
 }
 
-internal fun parseGenres(data: String): List<Genre> {
-    val jsonGenres = jsonFormat.decodeFromString<List<JsonGenre>>(data)
-    return jsonGenres.map { Genre(id = it.id, name = it.name) }
+suspend fun loadGenres(): Map<Int, Genre> {
+    return movieApi.getGenres().genres.map { it.id to Genre(it.id, it.name) }.toMap()
 }
 
-private fun readAssetFileToString(context: Context, fileName: String): String {
-    val stream = context.assets.open(fileName)
-    return stream.bufferedReader().readText()
+suspend fun loadMoviesList(): Movies {
+    return movieApi.getMovies()
 }
 
-private suspend fun loadActors(context: Context): List<Actor> = withContext(Dispatchers.IO) {
-    val data = readAssetFileToString(context, "people.json")
-    parseActors(data)
+suspend fun getActors(movieId: Int): List<Actor> {
+    return movieApi.getCredits(movieId).cast.map {
+        Actor(
+            it.castID ?: 0,
+            it.name ?: "",
+            it.profilePath ?: ""
+        )
+    }.toList()
 }
 
-internal fun parseActors(data: String): List<Actor> {
-    val jsonActors = jsonFormat.decodeFromString<List<JsonActor>>(data)
-    return jsonActors.map { Actor(id = it.id, name = it.name, picture = it.profilePicture) }
+suspend fun loadDetails(movieId: Int): Int? {
+    return movieApi.getDetails(movieId).runtime
 }
 
-@Suppress("unused")
-internal suspend fun loadMovies(context: Context): List<Movie> = withContext(Dispatchers.IO) {
-    val genresMap = loadGenres(context)
-    val actorsMap = loadActors(context)
+suspend fun loadMovies(): List<Movie>? {
 
-    val data = readAssetFileToString(context, "data.json")
-    parseMovies(data, genresMap, actorsMap)
-}
+    val currBaseUrl = loadBaseUrl()
 
-internal fun parseMovies(
-    data: String,
-    genres: List<Genre>,
-    actors: List<Actor>
-): List<Movie> {
-    val genresMap = genres.associateBy { it.id }
-    val actorsMap = actors.associateBy { it.id }
+    val genres = loadGenres()
 
-    val jsonMovies = jsonFormat.decodeFromString<List<JsonMovie>>(data)
-
-    return jsonMovies.map { jsonMovie ->
-        @Suppress("unused")
-        (Movie(
-        id = jsonMovie.id,
-        title = jsonMovie.title,
-        overview = jsonMovie.overview,
-        poster = jsonMovie.posterPicture,
-        backdrop = jsonMovie.backdropPicture,
-        ratings = jsonMovie.ratings,
-        numberOfRatings = jsonMovie.votesCount,
-        minimumAge = if (jsonMovie.adult) 16 else 13,
-        runtime = jsonMovie.runtime,
-        genres = jsonMovie.genreIds.map {
-            genresMap[it] ?: throw IllegalArgumentException("Genre not found")
-        },
-        actors = jsonMovie.actors.map {
-            actorsMap[it] ?: throw IllegalArgumentException("Actor not found")
-        }
-    ))
+    return loadMoviesList().results?.map {
+        Movie(
+            id = it?.id ?: 0,
+            title = it?.title ?: "",
+            overview = it?.overview ?: "",
+            poster = "$currBaseUrl/original/${it?.posterPath}",
+            backdrop = "$currBaseUrl/original/${it?.backdropPath}",
+            ratings = it?.voteAverage ?: 0 / 2f,
+            numberOfRatings = it?.voteCount ?: 0,
+            minimumAge = if (it?.adult == true) 16 else 13,
+            runtime = loadDetails(it?.id ?: 0) ?: 0,
+            genres = it?.genreIds?.map { id -> genres.getOrDefault(id, Genre(0, "")) }
+                ?.toList() as List<Genre>,
+            actors = getActors(
+                it?.id ?: 0
+            ).map { actor -> actor.copy(picture = "$currBaseUrl/original/${actor.picture}") }
+        )
     }
 }

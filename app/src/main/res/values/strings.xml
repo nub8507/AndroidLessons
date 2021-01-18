@@ -15,4 +15,5 @@
     <string name="movie_time_text">0 min</string>
     <string name="empty_actors_text">No actors</string>
     <string name="empty_movies_text">No movies</string>
+    <string name="lang">en-EN</string>
 </resources>
