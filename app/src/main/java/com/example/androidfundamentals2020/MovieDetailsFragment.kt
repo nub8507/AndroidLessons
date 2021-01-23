@@ -10,8 +10,8 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.example.androidfundamentals2020.data.Movie
 import com.example.androidfundamentals2020.databinding.MoviesDetailsFragmentBinding
+import com.example.androidfundamentals2020.db.DbMovieEntity
 
 class MovieDetailsFragment() : Fragment() {
 
@@ -21,7 +21,7 @@ class MovieDetailsFragment() : Fragment() {
         MovieDetailsViewModelFactory(MovieListInteractor())
     }
 
-    private var selectedMovieID: Int = 0
+    private var selectedMovieID: Long = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +35,7 @@ class MovieDetailsFragment() : Fragment() {
         binding = MoviesDetailsFragmentBinding.bind(view)
         binding!!.buttonBack.setOnClickListener { activity?.onBackPressed() }
         viewFill(
-            Movie(
+            DbMovieEntity(
                 id = 0,
                 title = "",
                 overview = "",
@@ -49,16 +49,16 @@ class MovieDetailsFragment() : Fragment() {
                 actors = listOf()
             )
         )
-        viewModel.selectedMovieList.observe(
-            this.viewLifecycleOwner,
-            Observer { viewModel.getMovie() })
+//        viewModel.selectedMovieList.observe(
+//            this.viewLifecycleOwner,
+//            Observer { viewModel.getMovie() })
         if (savedInstanceState == null) {
             viewModel.setMovie(selectedMovieID)
         }
         viewModel.movie.observe(this.viewLifecycleOwner, this::viewFill)
     }
 
-    private fun viewFill(movie: Movie) {
+    private fun viewFill(movie: DbMovieEntity) {
         movie.apply {
             binding!!.backgroundImageView.load(backdrop)
             binding!!.pgTextView.text = "$minimumAge+"
@@ -91,7 +91,7 @@ class MovieDetailsFragment() : Fragment() {
     }
 
     companion object {
-        fun newInstance(movieID: Int): MovieDetailsFragment {
+        fun newInstance(movieID: Long): MovieDetailsFragment {
             val movieFragment = MovieDetailsFragment()
             movieFragment.selectedMovieID = movieID
             return movieFragment

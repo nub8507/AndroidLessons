@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity(), MoviesListFragment.OnMoviesListListene
         }
     }
 
-    override fun onMoviesListMovieClicked(movieID: Int) {
+    override fun onMoviesListMovieClicked(movieID: Long) {
         supportFragmentManager.beginTransaction()
             .apply {
                 add(R.id.main_frame_layout, MovieDetailsFragment.newInstance(movieID))

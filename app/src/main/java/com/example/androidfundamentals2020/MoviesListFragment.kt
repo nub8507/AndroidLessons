@@ -10,8 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.androidfundamentals2020.data.Movie
 import com.example.androidfundamentals2020.databinding.MoviesListFragmentBinding
+import com.example.androidfundamentals2020.db.DbMovieEntity
 
 class MoviesListFragment : Fragment() {
 
@@ -42,19 +42,19 @@ class MoviesListFragment : Fragment() {
         binding = MoviesListFragmentBinding.bind(view)
         val movieListRecyclerView = binding!!.movieListRecyclerView
         val movieListEmpty = binding!!.emptyRecyclerTextView
-        var movies: List<Movie> = listOf()
+        var movies: List<DbMovieEntity> = listOf()
         setMovieListVisible(movies, movieListRecyclerView, movieListEmpty)
         viewModel.moviesList.observe(this.viewLifecycleOwner, this::updateMovieList)
     }
 
-    fun updateMovieList(movies: List<Movie>) {
+    private fun updateMovieList(movies: List<DbMovieEntity>) {
         val movieListRecyclerView = binding!!.movieListRecyclerView
         val movieListEmpty = binding!!.emptyRecyclerTextView
         setMovieListVisible(movies, movieListRecyclerView, movieListEmpty)
     }
 
     private fun setMovieListVisible(
-        movies: List<Movie>,
+        movies: List<DbMovieEntity>,
         movieListRecyclerView: RecyclerView,
         movieListEmpty: TextView
     ) {
@@ -80,11 +80,11 @@ class MoviesListFragment : Fragment() {
     }
 
     interface OnMoviesListListener {
-        fun onMoviesListMovieClicked(movieID: Int)
+        fun onMoviesListMovieClicked(movieID: Long)
     }
 
     private val movieOnClick = object : MovieListAdapter.OnRecyclerItemClicked {
-        override fun onClick(movieData: Movie) {
+        override fun onClick(movieData: DbMovieEntity) {
             openMovieDetailsListener?.onMoviesListMovieClicked(movieData.id)
         }
     }

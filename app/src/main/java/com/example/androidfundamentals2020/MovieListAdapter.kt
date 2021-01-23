@@ -8,11 +8,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.example.androidfundamentals2020.data.Movie
+import com.example.androidfundamentals2020.db.DbMovieEntity
 
 
 class MovieListAdapter(
-    private val movies: List<Movie>,
+    private val movies: List<DbMovieEntity>,
     private val clickListener: OnRecyclerItemClicked
 ) : RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {
 
@@ -26,7 +26,6 @@ class MovieListAdapter(
         val time: TextView = listItemView.findViewById(R.id.time_text_view)
         val pgRating: TextView = listItemView.findViewById(R.id.pg_text_view)
         val buttonMovieSelect: Button = listItemView.findViewById(R.id.btn_movie_select)
-        var movieID: Int = 0
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -40,7 +39,7 @@ class MovieListAdapter(
         bind(holder, movies[position])
     }
 
-    fun bind(holder: ViewHolder, movie: Movie) {
+    fun bind(holder: ViewHolder, movie: DbMovieEntity) {
         movie.apply {
             holder.background.load(poster)
             holder.name.text = title
@@ -51,7 +50,6 @@ class MovieListAdapter(
             holder.time.text = "$runtime min"
             holder.ratingStars.rating = ratings / 2
             holder.pgRating.text = "$minimumAge+"
-            holder.movieID = id
         }
         holder.buttonMovieSelect.setOnClickListener { clickListener.onClick(movie) }
     }
@@ -61,6 +59,6 @@ class MovieListAdapter(
     }
 
     interface OnRecyclerItemClicked {
-        fun onClick(movieData: Movie)
+        fun onClick(movieData: DbMovieEntity)
     }
 }

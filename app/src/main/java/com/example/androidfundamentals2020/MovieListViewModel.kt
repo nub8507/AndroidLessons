@@ -1,17 +1,13 @@
 package com.example.androidfundamentals2020
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.androidfundamentals2020.data.Movie
+import androidx.lifecycle.*
+import com.example.androidfundamentals2020.db.DbMovieEntity
 import kotlinx.coroutines.launch
-
 
 class MovieListViewModel(private val interactor: MovieListInteractor) : ViewModel() {
 
-    private var _mutableMovieList: MutableLiveData<List<Movie>> = MutableLiveData(emptyList())
-    val moviesList: LiveData<List<Movie>> get() = _mutableMovieList
+    val moviesList: LiveData<List<DbMovieEntity>> =
+        Transformations.map(interactor.moviesListModel) { return@map interactor.moviesListModel.value }
 
     init {
         loadMovies()
@@ -19,7 +15,7 @@ class MovieListViewModel(private val interactor: MovieListInteractor) : ViewMode
 
     private fun loadMovies() {
         viewModelScope.launch {
-            _mutableMovieList.postValue(interactor.getMoviesList())
+            interactor.getMoviesList()
         }
     }
 
