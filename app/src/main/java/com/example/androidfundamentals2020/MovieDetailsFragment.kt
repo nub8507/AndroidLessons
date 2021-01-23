@@ -6,12 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.example.androidfundamentals2020.data.Movie
 import com.example.androidfundamentals2020.databinding.MoviesDetailsFragmentBinding
-import com.example.androidfundamentals2020.db.DbMovieEntity
 
 class MovieDetailsFragment() : Fragment() {
 
@@ -34,41 +33,24 @@ class MovieDetailsFragment() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = MoviesDetailsFragmentBinding.bind(view)
         binding!!.buttonBack.setOnClickListener { activity?.onBackPressed() }
-        viewFill(
-            DbMovieEntity(
-                id = 0,
-                title = "",
-                overview = "",
-                poster = "",
-                backdrop = "",
-                ratings = 0f,
-                numberOfRatings = 0,
-                minimumAge = 0,
-                runtime = 0,
-                genres = listOf(),
-                actors = listOf()
-            )
-        )
-//        viewModel.selectedMovieList.observe(
-//            this.viewLifecycleOwner,
-//            Observer { viewModel.getMovie() })
+        viewFill(Movie())
         if (savedInstanceState == null) {
             viewModel.setMovie(selectedMovieID)
         }
         viewModel.movie.observe(this.viewLifecycleOwner, this::viewFill)
     }
 
-    private fun viewFill(movie: DbMovieEntity) {
+    private fun viewFill(movie: Movie) {
         movie.apply {
-            binding!!.backgroundImageView.load(backdrop)
-            binding!!.pgTextView.text = "$minimumAge+"
-            binding!!.nameTextView.text = title
+            binding!!.backgroundImageView.load(movieData.backdrop)
+            binding!!.pgTextView.text = "${movieData.minimumAge}+"
+            binding!!.nameTextView.text = movieData.title
             var tagMovie: String = ""
             genres.forEach { tagMovie += it.name + "," }
             binding!!.tagTextView.text = tagMovie
-            binding!!.starRatingbar.rating = ratings / 2
-            binding!!.ratingTextView.text = "$numberOfRatings Reviews"
-            binding!!.storylineTextView.text = overview
+            binding!!.starRatingbar.rating = movieData.ratings / 2
+            binding!!.ratingTextView.text = "${movieData.numberOfRatings} Reviews"
+            binding!!.storylineTextView.text = movieData.overview
 
             val actorListRecyclerView = binding!!.movieDetailActorRecyclerView
             val actorListEmptyText = binding!!.emptyRecyclerTextView

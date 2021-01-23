@@ -10,8 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.androidfundamentals2020.data.Movie
 import com.example.androidfundamentals2020.databinding.MoviesListFragmentBinding
-import com.example.androidfundamentals2020.db.DbMovieEntity
 
 class MoviesListFragment : Fragment() {
 
@@ -21,7 +21,6 @@ class MoviesListFragment : Fragment() {
     private val viewModel: MovieListViewModel by viewModels {
         MovieListViewModelFactory(MovieListInteractor())
     }
-
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -42,19 +41,19 @@ class MoviesListFragment : Fragment() {
         binding = MoviesListFragmentBinding.bind(view)
         val movieListRecyclerView = binding!!.movieListRecyclerView
         val movieListEmpty = binding!!.emptyRecyclerTextView
-        var movies: List<DbMovieEntity> = listOf()
+        var movies: List<Movie> = listOf()
         setMovieListVisible(movies, movieListRecyclerView, movieListEmpty)
         viewModel.moviesList.observe(this.viewLifecycleOwner, this::updateMovieList)
     }
 
-    private fun updateMovieList(movies: List<DbMovieEntity>) {
+    private fun updateMovieList(movies: List<Movie>) {
         val movieListRecyclerView = binding!!.movieListRecyclerView
         val movieListEmpty = binding!!.emptyRecyclerTextView
         setMovieListVisible(movies, movieListRecyclerView, movieListEmpty)
     }
 
     private fun setMovieListVisible(
-        movies: List<DbMovieEntity>,
+        movies: List<Movie>,
         movieListRecyclerView: RecyclerView,
         movieListEmpty: TextView
     ) {
@@ -84,8 +83,8 @@ class MoviesListFragment : Fragment() {
     }
 
     private val movieOnClick = object : MovieListAdapter.OnRecyclerItemClicked {
-        override fun onClick(movieData: DbMovieEntity) {
-            openMovieDetailsListener?.onMoviesListMovieClicked(movieData.id)
+        override fun onClick(movieData: Movie) {
+            openMovieDetailsListener?.onMoviesListMovieClicked(movieData.movieData.id)
         }
     }
 

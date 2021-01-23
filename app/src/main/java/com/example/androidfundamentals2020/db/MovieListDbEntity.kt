@@ -1,12 +1,12 @@
 package com.example.androidfundamentals2020.db
 
-import androidx.room.*
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity(
-    tableName = MovieListDbContract.Movies.TABLE_NAME,
-    indices = [Index(MovieListDbContract.Movies.COLUMN_NAME_ID)]
-)
-data class DbMovieEntity(
+    tableName = MovieListDbContract.Movies.TABLE_NAME)
+data class MovieDbEntity(
     @PrimaryKey
     @ColumnInfo(name = MovieListDbContract.Movies.COLUMN_NAME_ID)
     var id: Long = 0,
@@ -33,11 +33,5 @@ data class DbMovieEntity(
     var minimumAge: Int = 0,
 
     @ColumnInfo(name = MovieListDbContract.Movies.COLUMN_NAME_RUNTIME)
-    var runtime: Int = 0,
-
-    @Ignore
-    var genres: List<GenreDbEntity> = listOf(),
-
-    @Ignore
-    var actors: List<ActorDbEntity> = listOf()
-    )
+    var runtime: Int = 0
+)

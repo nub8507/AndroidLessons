@@ -8,11 +8,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.example.androidfundamentals2020.db.DbMovieEntity
-
+import com.example.androidfundamentals2020.data.Movie
 
 class MovieListAdapter(
-    private val movies: List<DbMovieEntity>,
+    private val movies: List<Movie>,
     private val clickListener: OnRecyclerItemClicked
 ) : RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {
 
@@ -39,17 +38,17 @@ class MovieListAdapter(
         bind(holder, movies[position])
     }
 
-    fun bind(holder: ViewHolder, movie: DbMovieEntity) {
+    fun bind(holder: ViewHolder, movie: Movie) {
         movie.apply {
-            holder.background.load(poster)
-            holder.name.text = title
-            holder.rating.text = "$numberOfRatings Reviews"
+            holder.background.load(movieData.poster)
+            holder.name.text = movieData.title
+            holder.rating.text = "${movieData.numberOfRatings} Reviews"
             var tagMovie: String = ""
             genres.forEach { tagMovie += it.name + "," }
             holder.tag.text = tagMovie
-            holder.time.text = "$runtime min"
-            holder.ratingStars.rating = ratings / 2
-            holder.pgRating.text = "$minimumAge+"
+            holder.time.text = "${movieData.runtime} min"
+            holder.ratingStars.rating = movieData.ratings / 2
+            holder.pgRating.text = "${movieData.minimumAge}+"
         }
         holder.buttonMovieSelect.setOnClickListener { clickListener.onClick(movie) }
     }
@@ -59,6 +58,6 @@ class MovieListAdapter(
     }
 
     interface OnRecyclerItemClicked {
-        fun onClick(movieData: DbMovieEntity)
+        fun onClick(movieData: Movie)
     }
 }

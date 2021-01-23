@@ -1,8 +1,8 @@
 package com.example.androidfundamentals2020.data
 
 import com.example.androidfundamentals2020.db.ActorDbEntity
-import com.example.androidfundamentals2020.db.DbMovieEntity
 import com.example.androidfundamentals2020.db.GenreDbEntity
+import com.example.androidfundamentals2020.db.MovieDbEntity
 import com.example.androidfundamentals2020.net.Movies
 import com.example.androidfundamentals2020.net.RetrofitModule.movieApi
 
@@ -32,28 +32,39 @@ suspend fun loadDetails(movieId: Int): Int? {
     return movieApi.getDetails(movieId).runtime
 }
 
-suspend fun loadMovies(): List<DbMovieEntity>? {
+suspend fun loadMovies(): List<Movie>? {
 
     val currBaseUrl = loadBaseUrl()
 
     val genres = loadGenres()
 
     return loadMoviesList().results?.map {
-        DbMovieEntity(
-            id = (it?.id ?: 0).toLong(),
-            title = it?.title ?: "",
-            overview = it?.overview ?: "",
-            poster = "$currBaseUrl/original/${it?.posterPath}",
-            backdrop = "$currBaseUrl/original/${it?.backdropPath}",
-            ratings = it?.voteAverage ?: 0 / 2f,
-            numberOfRatings = it?.voteCount ?: 0,
-            minimumAge = if (it?.adult == true) 16 else 13,
-            runtime = loadDetails(it?.id ?: 0) ?: 0,
-            genres = it?.genreIds?.map { id -> genres.getOrDefault(id, GenreDbEntity(0, "")) }
-                ?.toList() as List<GenreDbEntity>,
+        Movie(
+            MovieDbEntity(
+                id = (it?.id ?: 0).toLong(),
+                title = it?.title ?: "",
+                overview = it?.overview ?: "",
+                poster = "$currBaseUrl/original/${it?.posterPath}",
+                backdrop = "$currBaseUrl/original/${it?.backdropPath}",
+                ratings = it?.voteAverage ?: 0 / 2f,
+                numberOfRatings = it?.voteCount ?: 0,
+                minimumAge = if (it?.adult == true) 16 else 13,
+                runtime = loadDetails(it?.id ?: 0) ?: 0
+            ),
+            genres = (it?.genreIds?.map { id -> genres.getOrDefault(id, GenreDbEntity(0, "")) }
+                ?.toList() as List<GenreDbEntity>).map { genre ->
+                genre.copy(
+                    movieId = (it?.id ?: 0).toLong()
+                )
+            },
             actors = getActors(
                 it.id ?: 0
-            ).map { actor -> actor.copy(picture = "$currBaseUrl/original/${actor.picture}") }
+            ).map { actor ->
+                actor.copy(
+                    picture = "$currBaseUrl/original/${actor.picture}",
+                    movieId = (it?.id ?: 0).toLong()
+                )
+            }
         )
     }
 }

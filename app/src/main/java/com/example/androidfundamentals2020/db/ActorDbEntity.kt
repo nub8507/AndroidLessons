@@ -2,25 +2,33 @@ package com.example.androidfundamentals2020.db
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.Index
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
 @Entity(
     tableName = MovieListDbContract.Actors.TABLE_NAME,
-    indices = [Index(MovieListDbContract.Actors.COLUMN_NAME_ID)]
+    foreignKeys = [ForeignKey(
+        entity = MovieDbEntity::class,
+        parentColumns = [MovieListDbContract.Movies.COLUMN_NAME_ID],
+        childColumns = [MovieListDbContract.Actors.COLUMN_NAME_MOVIE_ID],
+        onDelete = ForeignKey.CASCADE
+    )]
 )
 data class ActorDbEntity(
-    @PrimaryKey
-    @ColumnInfo(name = MovieListDbContract.Actors.COLUMN_NAME_ID)
-    val id: Long = 0,
+
+    @ColumnInfo(name = MovieListDbContract.Actors.COLUMN_NAME_ID_ID)
+    var id: Long = 0,
 
     @ColumnInfo(name = MovieListDbContract.Actors.COLUMN_NAME_NAME)
-    val name: String = "",
+    var name: String = "",
 
     @ColumnInfo(name = MovieListDbContract.Actors.COLUMN_NAME_PICTURE)
-    val picture: String = "",
+    var picture: String = "",
 
     @ColumnInfo(name = MovieListDbContract.Actors.COLUMN_NAME_MOVIE_ID)
-    val movieId: Long = 0
+    var movieId: Long = 0,
 
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = MovieListDbContract.Actors.COLUMN_NAME_ID)
+    var genreId: Long = 0
 )

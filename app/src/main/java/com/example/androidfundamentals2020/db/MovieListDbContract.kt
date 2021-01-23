@@ -25,6 +25,7 @@ object MovieListDbContract {
         const val TABLE_NAME = "Actors"
 
         const val COLUMN_NAME_ID = BaseColumns._ID
+        const val COLUMN_NAME_ID_ID = "id"
         const val COLUMN_NAME_NAME = "name"
         const val COLUMN_NAME_PICTURE = "picture"
         const val COLUMN_NAME_MOVIE_ID = "movie_id"
@@ -35,7 +36,9 @@ object MovieListDbContract {
         const val TABLE_NAME = "Genres"
 
         const val COLUMN_NAME_ID = BaseColumns._ID
+        const val COLUMN_NAME_ID_ID = "id"
         const val COLUMN_NAME_NAME = "name"
+        const val COLUMN_NAME_MOVIE_ID = "movie_id"
 
     }
 }

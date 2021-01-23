@@ -5,9 +5,14 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [DbMovieEntity::class], version = 1)
-abstract class MovieListDatabase : RoomDatabase(){
-    abstract fun moviesDao(): DbMoviesDao
+@Database(
+    entities = [MovieDbEntity::class, ActorDbEntity::class, GenreDbEntity::class],
+    version = 1
+)
+abstract class MovieListDatabase : RoomDatabase() {
+    abstract fun moviesDao(): MoviesListDbDao
+    abstract fun actorsDao(): ActorDbDao
+    abstract fun genresDao(): GenreDbDao
 
     companion object {
 
