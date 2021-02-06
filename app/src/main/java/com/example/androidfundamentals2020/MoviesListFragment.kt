@@ -22,7 +22,6 @@ class MoviesListFragment : Fragment() {
         MovieListViewModelFactory(MovieListInteractor())
     }
 
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OnMoviesListListener) {
@@ -47,7 +46,7 @@ class MoviesListFragment : Fragment() {
         viewModel.moviesList.observe(this.viewLifecycleOwner, this::updateMovieList)
     }
 
-    fun updateMovieList(movies: List<Movie>) {
+    private fun updateMovieList(movies: List<Movie>) {
         val movieListRecyclerView = binding!!.movieListRecyclerView
         val movieListEmpty = binding!!.emptyRecyclerTextView
         setMovieListVisible(movies, movieListRecyclerView, movieListEmpty)
@@ -80,12 +79,12 @@ class MoviesListFragment : Fragment() {
     }
 
     interface OnMoviesListListener {
-        fun onMoviesListMovieClicked(movieID: Int)
+        fun onMoviesListMovieClicked(movieID: Long)
     }
 
     private val movieOnClick = object : MovieListAdapter.OnRecyclerItemClicked {
         override fun onClick(movieData: Movie) {
-            openMovieDetailsListener?.onMoviesListMovieClicked(movieData.id)
+            openMovieDetailsListener?.onMoviesListMovieClicked(movieData.movieData.id)
         }
     }
 

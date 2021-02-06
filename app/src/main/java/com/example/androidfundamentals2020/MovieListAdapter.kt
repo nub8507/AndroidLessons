@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.androidfundamentals2020.data.Movie
 
-
 class MovieListAdapter(
     private val movies: List<Movie>,
     private val clickListener: OnRecyclerItemClicked
@@ -26,7 +25,6 @@ class MovieListAdapter(
         val time: TextView = listItemView.findViewById(R.id.time_text_view)
         val pgRating: TextView = listItemView.findViewById(R.id.pg_text_view)
         val buttonMovieSelect: Button = listItemView.findViewById(R.id.btn_movie_select)
-        var movieID: Int = 0
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -42,16 +40,15 @@ class MovieListAdapter(
 
     fun bind(holder: ViewHolder, movie: Movie) {
         movie.apply {
-            holder.background.load(poster)
-            holder.name.text = title
-            holder.rating.text = "$numberOfRatings Reviews"
+            holder.background.load(movieData.poster)
+            holder.name.text = movieData.title
+            holder.rating.text = "${movieData.numberOfRatings} Reviews"
             var tagMovie: String = ""
             genres.forEach { tagMovie += it.name + "," }
             holder.tag.text = tagMovie
-            holder.time.text = "$runtime min"
-            holder.ratingStars.rating = ratings / 2
-            holder.pgRating.text = "$minimumAge+"
-            holder.movieID = id
+            holder.time.text = "${movieData.runtime} min"
+            holder.ratingStars.rating = movieData.ratings / 2
+            holder.pgRating.text = "${movieData.minimumAge}+"
         }
         holder.buttonMovieSelect.setOnClickListener { clickListener.onClick(movie) }
     }

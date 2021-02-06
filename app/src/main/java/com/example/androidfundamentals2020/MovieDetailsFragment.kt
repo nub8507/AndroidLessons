@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
@@ -21,7 +20,7 @@ class MovieDetailsFragment() : Fragment() {
         MovieDetailsViewModelFactory(MovieListInteractor())
     }
 
-    private var selectedMovieID: Int = 0
+    private var selectedMovieID: Long = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,24 +33,7 @@ class MovieDetailsFragment() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = MoviesDetailsFragmentBinding.bind(view)
         binding!!.buttonBack.setOnClickListener { activity?.onBackPressed() }
-        viewFill(
-            Movie(
-                id = 0,
-                title = "",
-                overview = "",
-                poster = "",
-                backdrop = "",
-                ratings = 0f,
-                numberOfRatings = 0,
-                minimumAge = 0,
-                runtime = 0,
-                genres = listOf(),
-                actors = listOf()
-            )
-        )
-        viewModel.selectedMovieList.observe(
-            this.viewLifecycleOwner,
-            Observer { viewModel.getMovie() })
+        viewFill(Movie())
         if (savedInstanceState == null) {
             viewModel.setMovie(selectedMovieID)
         }
@@ -60,15 +42,15 @@ class MovieDetailsFragment() : Fragment() {
 
     private fun viewFill(movie: Movie) {
         movie.apply {
-            binding!!.backgroundImageView.load(backdrop)
-            binding!!.pgTextView.text = "$minimumAge+"
-            binding!!.nameTextView.text = title
+            binding!!.backgroundImageView.load(movieData.backdrop)
+            binding!!.pgTextView.text = "${movieData.minimumAge}+"
+            binding!!.nameTextView.text = movieData.title
             var tagMovie: String = ""
             genres.forEach { tagMovie += it.name + "," }
             binding!!.tagTextView.text = tagMovie
-            binding!!.starRatingbar.rating = ratings / 2
-            binding!!.ratingTextView.text = "$numberOfRatings Reviews"
-            binding!!.storylineTextView.text = overview
+            binding!!.starRatingbar.rating = movieData.ratings / 2
+            binding!!.ratingTextView.text = "${movieData.numberOfRatings} Reviews"
+            binding!!.storylineTextView.text = movieData.overview
 
             val actorListRecyclerView = binding!!.movieDetailActorRecyclerView
             val actorListEmptyText = binding!!.emptyRecyclerTextView
@@ -91,7 +73,7 @@ class MovieDetailsFragment() : Fragment() {
     }
 
     companion object {
-        fun newInstance(movieID: Int): MovieDetailsFragment {
+        fun newInstance(movieID: Long): MovieDetailsFragment {
             val movieFragment = MovieDetailsFragment()
             movieFragment.selectedMovieID = movieID
             return movieFragment

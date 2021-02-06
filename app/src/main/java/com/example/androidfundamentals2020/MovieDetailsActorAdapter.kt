@@ -7,9 +7,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.example.androidfundamentals2020.data.Actor
+import com.example.androidfundamentals2020.db.ActorDbEntity
 
-class MovieDetailsActorAdapter(private val actors: List<Actor>) :
+class MovieDetailsActorAdapter(private val actors: List<ActorDbEntity>) :
     RecyclerView.Adapter<MovieDetailsActorAdapter.ViewHolder>() {
 
     class ViewHolder(listItemView: View) : RecyclerView.ViewHolder(listItemView) {
