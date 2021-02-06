@@ -2,8 +2,10 @@ package com.example.androidfundamentals2020
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
+import androidx.work.WorkInfo
+import com.example.androidfundamentals2020.MovieAppClass.Companion.moviesRepository
 import com.example.androidfundamentals2020.data.Movie
-import com.example.androidfundamentals2020.data.loadMovies
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,30 +22,29 @@ class MovieListInteractor() {
     private var _mutableMovieModel: MutableLiveData<Movie> = MutableLiveData(Movie())
     val movieModel: LiveData<Movie> get() = _mutableMovieModel
 
-    suspend fun getMovieById(movieID: Long) {
+    val moviesWorkObserver = Observer<WorkInfo> { workInfo ->
+        if (workInfo.state == WorkInfo.State.SUCCEEDED) {
+            scopeData.launch {
+                _mutableMovieListModel.postValue(moviesRepository.readMoviesFromDb())
+            }
+        }
+    }
+
+    fun getMovieById(movieID: Long) {
         scopeData.launch {
             _mutableMovieModel.postValue(
-                MovieAppClass.db.moviesDao().getById(movieID)
+                moviesRepository.moviesDao.getById(movieID)
             )
         }
     }
 
-    suspend fun getMoviesList() {
-        readMoviesFromDb()
-        scopeInternet.launch { fillMovies() }
-    }
-
-    private suspend fun fillMovies() {
-        var movies = loadMovies()
-        movies?.forEach {
-            MovieAppClass.db.moviesDao().insert(it.movieData)
-            it.actors.forEach { MovieAppClass.db.actorsDao().insert(it) }
-            it.genres.forEach { MovieAppClass.db.genresDao().insert(it) }
+    fun getMoviesList() {
+        scopeData.launch {
+            _mutableMovieListModel.postValue(moviesRepository.readMoviesFromDb())
         }
-        readMoviesFromDb()
+        scopeInternet.launch {
+            _mutableMovieListModel.postValue(moviesRepository.fillMovies())
+        }
     }
 
-    private suspend fun readMoviesFromDb() {
-        scopeData.launch { _mutableMovieListModel.postValue(MovieAppClass.db.moviesDao().getAll()) }
-    }
 }

@@ -19,7 +19,7 @@ class MoviesListFragment : Fragment() {
     private var openMovieDetailsListener: OnMoviesListListener? = null
 
     private val viewModel: MovieListViewModel by viewModels {
-        MovieListViewModelFactory(MovieListInteractor())
+        MovieListViewModelFactory(MovieListInteractor(), this, requireActivity().applicationContext)
     }
 
     override fun onAttach(context: Context) {
