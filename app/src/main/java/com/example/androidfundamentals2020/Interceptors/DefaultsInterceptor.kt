@@ -1,4 +1,4 @@
-package com.example.androidfundamentals2020.Interceptors
+package com.example.androidfundamentals2020.interceptors
 
 import com.example.androidfundamentals2020.BuildConfig
 import com.example.androidfundamentals2020.R
