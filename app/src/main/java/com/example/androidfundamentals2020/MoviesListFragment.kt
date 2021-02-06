@@ -19,7 +19,7 @@ class MoviesListFragment : Fragment() {
     private var openMovieDetailsListener: OnMoviesListListener? = null
 
     private val viewModel: MovieListViewModel by viewModels {
-        MovieListViewModelFactory(MovieListInteractor(requireContext()))
+        MovieListViewModelFactory(MovieListInteractor())
     }
 
 
@@ -52,7 +52,6 @@ class MoviesListFragment : Fragment() {
         val movieListEmpty = binding!!.emptyRecyclerTextView
         setMovieListVisible(movies, movieListRecyclerView, movieListEmpty)
     }
-
 
     private fun setMovieListVisible(
         movies: List<Movie>,

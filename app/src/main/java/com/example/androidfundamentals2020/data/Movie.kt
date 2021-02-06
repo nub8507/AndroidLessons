@@ -1,8 +1,5 @@
 package com.example.androidfundamentals2020.data
 
-import com.example.androidfundamentals2020.data.Actor
-import com.example.androidfundamentals2020.data.Genre
-
 data class Movie(
     val id: Int,
     val title: String,

@@ -33,7 +33,7 @@ class MovieDetailsViewModel(private val interactor: MovieListInteractor) : ViewM
         viewModelScope.launch {
             val movieID = selectedMovieList.value
             val movies = interactor.getMoviesList()
-            val movie = movies.find { actor -> movieID == actor.id }
+            val movie = movies?.find { actor -> movieID == actor.id }
             if (movie != null) {
                 _mutableMovie.postValue(movie)
             }
